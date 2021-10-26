@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>512</string>
+	<string>509</string>
 	<key>AMApplicationVersion</key>
 	<string>2.10</string>
 	<key>AMDocumentVersion</key>
@@ -62,20 +62,20 @@
 					<string>#!/bin/sh
 export PATH=/usr/local/bin:/opt/homebrew/bin/:$PATH
 
-rsvg_path=$(which rsvg-convert)
+rsvg_path="$(which rsvg-convert)"
 
-if [ -z "$rsvg_path" ]
-then
+if [[ -z "$rsvg_path" ]]; then
 	osascript -e  'tell app "System Events" to display dialog "Missing librsvg!"'
 	exit 0
 fi
 
-for f in "$@"
-do
-	dirname="$(dirname "$f")"
-	basename=$(basename "$f" | cut -d. -f1)
-	output=$dirname/$basename.pdf
-	`$($rsvg_path -f pdf -o $output $f)`
+for file in "$@"; do
+	dirname="$(dirname "$file")"
+	basename="$(basename "$file" | cut -d. -f1)"
+
+	output="$dirname/$basename.pdf"
+
+	$rsvg_path -f pdf -o "$output" "$file"
 done</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
@@ -191,7 +191,7 @@ done</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>499.500000:305.000000</string>
+				<string>443.500000:543.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
